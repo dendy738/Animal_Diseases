@@ -60,49 +60,50 @@ Animal list for which disease can be predicted is following:
 Also, you can look at general disease statistic for each animal dependent on animal feature and your own statistic of activity.
 
 Structure:
+
     Final_project/
-    |-Animal_data/   # Folder with a files for loading in the project
-        |-animals.pkl
-        |-animals_by_number.pkl
-        |-breeds.pkl
-        |-diseases.pkl
-    |-AnimalDiseases/  # Django project
-        |-AnimalDiseases/
-            |-Files which Django installed by default
+    |--Animal_data/   # Folder with a files for loading in the project
+        |--animals.pkl
+        |--animals_by_number.pkl
+        |--breeds.pkl
+        |--diseases.pkl
+    |--AnimalDiseases/  # Django project
+        |--AnimalDiseases/
+            |--Files which Django installed by default
             ...
-        |-encoders/
-            |-pass_encoder.py
-        |-login/
-            |-Files which Django installed by default
+        |--encoders/
+            |--pass_encoder.py
+        |--login/
+            |--Files which Django installed by default
             ...
-        |-main_app/
-            |-Files which Django installed by default
+        |--main_app/
+            |--Files which Django installed by default
             ...
-        |-regst/
-            |-Files which Django installed by default
+        |--regst/
+            |--Files which Django installed by default
             ...
-        |-statistic/
-            |-Files which Django installed by default
+        |--statistic/
+            |--Files which Django installed by default
             ...
-        |-user_statistic/
-            |-Files which Django installed by default
+        |--user_statistic/
+            |--Files which Django installed by default
             ...
-        |-manage.py
-    |-DataScience/  # DataScience exploration
-        |-animal_data.ipynb
-        |-cleaned_animal_disease_prediction.csv
-        |-final_variant.ipynb
-        |-second_variant_of_animals_data.ipynb
-    |-Models/  # Folder with a models
-        |-Final_Forest.pkl
-        |-Final_KNN.pkl
-        |-Final_Tree.pkl
-    |-another_transformers.py  # Custom transformers for pipeline (actual)
-    |-README.md  # Description of exploitation
-    |-requirements.txt  # Dependences
-    |-test.py  # Tests
-    |-transf_mod.py  # Second version of custom transformers (not used)
-    |-transformers.py  # First version of custom transformers (not used)
+        |--manage.py
+    |--DataScience/  # DataScience exploration
+        |--animal_data.ipynb
+        |--cleaned_animal_disease_prediction.csv
+        |--final_variant.ipynb
+        |--second_variant_of_animals_data.ipynb
+    |--Models/  # Folder with a models
+        |--Final_Forest.pkl
+        |--Final_KNN.pkl
+        |--Final_Tree.pkl
+    |--another_transformers.py  # Custom transformers for pipeline (actual)
+    |--README.md  # Description of exploitation
+    |--requirements.txt  # Dependences
+    |--test.py  # Tests
+    |--transf_mod.py  # Second version of custom transformers (not used)
+    |--transformers.py  # First version of custom transformers (not used)
 
 In order to deploy the application you need:
  - install whole package from GitHub to your local machine;
