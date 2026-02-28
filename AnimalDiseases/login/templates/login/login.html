@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'login/css/login_animal.css' %}"/>
+</head>
+<body>
+    <div>
+        {% if messages %}
+            {% for mess in messages %}
+                <h4>{{ mess }}</h4>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>{{ field.label_tag }}</div>
+            <div>{{ field }}</div>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <div>{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+            <br>
+        {% endfor %}
+        <button type="submit">Log in</button>
+    </form>
+    <button type="button"><a href="{% url 'email_form' %}">Forgot a password?</a></button>
+    <button type="button"><a href="{% url 'register' %}">Registration</a></button>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'regst/css/animal.css' %}"/>
+</head>
+<body>
+    {% if messages %}
+        {% for mess in messages %}
+            <h4>{{ mess }}</h4>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>{{ field.label_tag }}</div>
+            <div>{{ field }}</div>
+            {% if field.errors %}
+                <p>{{field.help_text}}</p>
+            {% endif %}
+            <br>
+        {% endfor %}
+        <br>
+        <button type="submit">Sign Up</button>
+    </form>
+    <br>
+    <a href="{% url 'login' %}">Already signed up? Login</a>
+</body>
+</html>

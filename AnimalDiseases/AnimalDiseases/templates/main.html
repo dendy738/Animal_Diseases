@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting</title>
+    <link rel="stylesheet" href="{% static 'greet/css/greet_style.css' %}"/>
+</head>
+<body>
+    <p>Service for disease recognition of your pet</p>
+    <a href="{% url 'register' %}">Find out disease</a>
+</body>
+</html>

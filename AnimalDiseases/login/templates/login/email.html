@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset password</title>
+    <link rel="stylesheet" href="{% static 'login/css/email_and_reset_pass_animal.css' %}"/>
+</head>
+<body>
+    {% if messages %}
+        {% for mess in messages %}
+            <h5>{{ mess }}</h5>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <p>Enter your username:</p>
+        <input type="text" name="username"/>
+        <p>Enter your email:</p>
+        <input type="text" name="email"/>
+        <br>
+        <button type="submit">Send</button>
+    </form>
+    <button type="button"><a href="{% url 'login' %}">Back</a></button>
+    <br>
+</body>
+</html>

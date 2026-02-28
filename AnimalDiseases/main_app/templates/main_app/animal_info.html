@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symptoms</title>
+    <link rel="stylesheet" href="{% static 'main_app/css/symptoms_page.css' %}"/>
+</head>
+<body>
+    <aside>
+        <ul>
+            <li><a href="{% url 'animal_type' idn %}">Main</a></li>
+            <li><a href="{% url 'choice' idn %}">Animals Statistic</a></li>
+        </ul>
+        <ul class="user-actions">
+            <li><a href="{% url 'user_statistic' idn %}">Your statistic</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </aside>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="icon-header">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org">
+                <circle cx="4.5" cy="10.5" r="2.5"/>
+                <circle cx="9" cy="5.5" r="2.5"/>
+                <circle cx="15" cy="5.5" r="2.5"/>
+                <circle cx="19.5" cy="10.5" r="2.5"/>
+                <path d="M12 11c-3.3 0-6 2.7-6 6 0 3.3 2.7 5 6 5s6-1.7 6-5c0-3.3-2.7-6-6-6z"/>
+            </svg>
+        </div>
+        {% for field in form %}
+            {{ field.label_tag }}
+            <br>
+            {{ field }}
+            <br>
+            {{ field.help_text }}
+        {% endfor %}
+        <br>
+        <button type="submit">Get result</button>
+        <a class="back-btn" href="{% url 'animal_type' idn %}" style="text-decoration: none;">Back</a>
+    </form>
+</body>
+</html>

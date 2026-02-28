@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Statistic</title>
+    <link rel="stylesheet" href="{% static 'css/user_stat.css' %}"/>
+</head>
+<body>
+    <aside>
+        <ul>
+            <li><a href="{% url 'animal_type' idn %}">Main</a></li>
+            <li><a href="{% url 'choice' idn %}">Animals Statistic</a></li>
+        </ul>
+        <ul class="user-actions">
+            <li><a href="{% url 'user_statistic' idn %}">Your statistic</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </aside>
+    <main>
+        {% if statistic %}
+            <div class="analytics-card">
+                <img src="{% static 'images/user_'|add:idn|add:'_statistic.png' %}" alt="User statistic"/>
+
+                <div class="analytics">
+                    <ul>
+                        <li><h4>Predictions quantity: <span>{{ statistic.request_quantity }}</span></h4></li>
+                        <li><h4>Most frequent animal: <span>{{ statistic.most_freq_animal }}</span></h4></li>
+                        <li><h4>Most frequent disease: <span>{{ statistic.most_freq_disease }}</span></h4></li>
+                        <li><h4>Last requested animal: <span>{{ statistic.last_animal }}</span></h4></li>
+                        <li><h4>Last prediction: <span>{{ statistic.last_disease }}</span></h4></li>
+                        <li><h4>Date of last prediction: <span>{{ statistic.last_request_date }}</span></h4></li>
+                    </ul>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-card">
+                <h4><span>You don't have a statistic yet.</span></h4>
+            </div>
+        {% endif %}
+        <a class="back-btn" href="{% url 'animal_type' idn %}" style="text-decoration: none;">Back</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistic Describe</title>
+    <link rel="stylesheet" href="{% static 'css/plot.css' %}"/>
+</head>
+<body>
+    <aside>
+        <ul>
+            <li><a href="{% url 'animal_type' idn %}">Main</a></li>
+            <li><a href="{% url 'choice' idn %}">Animals Statistic</a></li>
+        </ul>
+        <ul class="user-actions">
+            <li><a href="{% url 'user_statistic' idn %}">Your statistic</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div class="image">
+            {% block image %}{% endblock image %}
+        </div>
+        <a class="back-btn" href="{% url 'certain' idn pet %}" style="text-decoration: none;">Back</a>
+    </main>
+</body>
+</html>
