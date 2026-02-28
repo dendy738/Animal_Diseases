@@ -108,13 +108,20 @@ In order to deploy the application you need:
  - install whole package from GitHub to your local machine;
 
  - install all necessary libraries:
-    [ python -m pip install -r requirements.txt ]
+   
+       python -m pip install -r requirements.txt 
 
  - in the file 'settings.py' which is located in 'Final_project/AnimalDiseases/AnimalDiseases/settings.py' set a connection
 to your own DB via the variable 'DATABASES' by set up options or use SQLite3 by default. Also, set the variable 'DEBUG' to True for activating style;
 
- - run the command [ python manage.py runserver ] in your shell. By default, Django running all projects across port 8000.
-If port is not accessed - [ python manage.py runserver <available_port_number> ];
+ - run the command  in your shell.
+
+        python manage.py runserver
+
+   By default, Django running all projects across port 8000.
+   If port is not accessed:
+
+        python manage.py runserver <available_port_number>
 
  - open your browser and enter 'http://127.0.0.1:<your_port_number>' 
 
