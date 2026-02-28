@@ -106,6 +106,8 @@ Structure:
 
 In order to deploy the application you need:
  - install whole package from GitHub to your local machine;
+ 
+ - in your shell which you use change your current path to the root project; 
 
  - install all necessary libraries:
    
