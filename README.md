@@ -3,29 +3,46 @@ Web application "Animal Diseases"
 Application is intended for disease prediction of your pet or farm animals.
 During application development animals data with animal parameters and all possible symptoms for each disease were explore.
 For disease prediction were used ML algorithms with a partial algorithm transformation of own development.
+
 Using three models for disease prediction:
+
 First model - RandomForest:
     Evaluation:
+    
         Accuracy: 0.9733333333333334
+        
         Precision: 0.9755434782608695
+        
         Recall: 0.9864777432712215
+        
         F1 score: 0.9757475314540534
+        
         ROC-AUC score: 0.9998847467352806
 
 Second model - KNN:
     Evaluation:
+    
         Accuracy: 0.98
+        
         Precision: 0.9786588029707296
+        
         Recall: 0.9793577981651376
+        
         F1 score: 0.9764435789544433
+        
         ROC-AUC score: 0.9954470027630216
 
 Third model - DecisionTree:
     Evaluation:
+    
         Accuracy: 0.838
+        
         Precision: 0.8937613809514636
+        
         Recall: 0.9055963988207547
+        
         F1 score: 0.8813141338940813
+        
         ROC-AUC score: 0.9989510328237392
 
 Three models asynchronously do a prediction and then most popularity disease is selected.
