@@ -27,7 +27,7 @@ sys.path.append(str(BASE_DIR.parent))
 SECRET_KEY = 'django-insecure-!6prfac(utm0o(h)a7mby5d%kcm&l!amtznyd5ucvh$pxb89*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -108,18 +108,18 @@ INTERNAL_IPS = [
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'users.sqlite3',
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'animals_diseases',
-        'USER': 'root',
-        'PASSWORD': 'db668696-+',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'users.sqlite3',
+    },
+    # 'default': {
+    #     'ENGINE': '', # Engine for your DB
+    #     'NAME': '', # Name of your DB
+    #     'USER': '', # Your account name of DB
+    #     'PASSWORD': '', # Your account password of DB
+    #     'HOST': '', # Host where your DB is located
+    #     'PORT': '', # Your port to connect to DB
+    # }
 }
 
 
