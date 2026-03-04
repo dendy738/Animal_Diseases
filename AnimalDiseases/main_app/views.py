@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views import View
 
@@ -14,7 +14,7 @@ import numpy as np
 import pickle
 from .phrases import PHRASES
 from random import choice
-import another_transformers
+import a_trans
 from pathlib import Path
 from collections import Counter
 import asyncio
@@ -103,8 +103,7 @@ class DiseaseSymptomsView(View):
                     predictions: List or array like object which contain a predictions.
     """
 
-    animals = None
-    animals_by_number = None
+    animals_data = None
     diseases = None
 
     def get(self, request, idn, pet):
@@ -124,30 +123,27 @@ class DiseaseSymptomsView(View):
             data = symp_form.cleaned_data
 
             for k, v in data.items():
-                if k == 'breed':
-                    if len(v) == 1:
-                        breed = float(str(pet) + f'.0{v}')
-                    else:
-                        breed = float(str(pet) + f'.{v}')
-                    animal_inst.append(breed)
+                if not v:
+                    animal_inst.append(np.nan)
                     continue
+
+                if k in ('breed', 'temperature'):
+                    animal_inst.append(v)
                 else:
-                    if v:
-                        animal_inst.append(int(v))
-                    else:
-                        animal_inst.append(np.nan)
-                    continue
+                    animal_inst.append(int(v))
+
+            print(animal_inst)
 
             self._main_fetch_data()
             user = User.objects.get(identifier=idn)
 
-            if sum(animal_inst[2:-1]) == 0 and animal_inst[-1] < 130:
-                user.usersactions_set.create(animal=self.animals_by_number[pet])
+            if sum(animal_inst[2:19]) == 0 and animal_inst[-2] < 130 and animal_inst[-1] < 39.0:
+                user.usersactions_set.create(animal=pet)
                 cleared_messages(request)
                 messages.success(request, 'Your pet completely healthy!')
                 return HttpResponseRedirect(f'/{idn}/main/{pet}/result')
 
-            animal_df = pd.DataFrame(np.array(animal_inst).reshape(1, -1), columns=self.animals.columns[:-1])
+            animal_df = pd.DataFrame(np.array(animal_inst).reshape(1, -1), columns=self.animals_data.columns[:-1])
 
             preds = asyncio.run(self._main_prediction(animal_df))
 
@@ -155,7 +151,7 @@ class DiseaseSymptomsView(View):
 
             disease = [d for d, n in self.diseases.items() if n == common_pred][0]
 
-            user.usersactions_set.create(animal=self.animals_by_number[pet], result=disease)
+            user.usersactions_set.create(animal=pet, result=disease)
 
             cleared_messages(request)
             messages.info(request, choice(PHRASES) + disease)
@@ -167,7 +163,7 @@ class DiseaseSymptomsView(View):
 
 
     async def _fetch_data(self, file_name):
-        with open(str(BASE_DIR.parent) + f'/Animal_data/{file_name}', 'rb') as file:
+        with open(str(BASE_DIR.parent) + f'/{file_name}', 'rb') as file:
             data = pickle.load(file)
             if 'number' in file_name:
                 data = dict((n, a) for a, n in data.items())
@@ -175,17 +171,17 @@ class DiseaseSymptomsView(View):
 
 
     async def _fetch_animals_data(self):
-        for file_name in ('animals.pkl', 'diseases.pkl', 'animals_by_number.pkl'):
+        for file_name in ('animals_data.pkl', 'diseases.pkl'):
             await asyncio.create_task(self._fetch_data(file_name))
 
 
     async def _fetch_model(self, file_name, n_model):
-        with open(str(BASE_DIR.parent) + f'/Models/{file_name}', 'rb') as file:
+        with open(str(BASE_DIR.parent) + f'/{file_name}', 'rb') as file:
             setattr(self, f'model_{n_model}', pickle.load(file))
 
 
     async def _models_integration(self):
-        for n, model in enumerate(('Final_Forest.pkl', 'Final_KNN.pkl', 'Final_Tree.pkl'), start=1):
+        for n, model in enumerate(('Final_Forest_2.pkl', 'Final_KNN_2.pkl', 'Final_Tree_2.pkl'), start=1):
             await asyncio.create_task(self._fetch_model(model, n))
 
 

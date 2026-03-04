@@ -16,10 +16,10 @@ class AnimalTypeForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        with open(str(BASE_DIR.parent) + '/Animal_data/animals_by_number.pkl', 'rb') as file:
-            self.animals_by_number = pickle.load(file)
+        with open(str(BASE_DIR.parent) + '/animals_data.pkl', 'rb') as file:
+            self.animals_data = pickle.load(file)
 
-        choices = [(n, a) for a, n in self.animals_by_number.items()]
+        choices = [(a, a) for a in self.animals_data['Animal_Type'].unique()]
         self.fields['animal_type'].choices = choices
 
 
@@ -43,27 +43,29 @@ class SymptomsForm(forms.Form):
     skin = forms.ChoiceField(label='Skin lesions', choices=((0, 'No'), (1, 'Yes')))
     nose = forms.ChoiceField(label='Nasal discharge', choices=((0, 'No'), (1, 'Yes')))
     eyes = forms.ChoiceField(label='Eyes discharge', choices=((0, 'No'), (1, 'Yes')))
-    fever = forms.ChoiceField(label='Fever', choices=((0, 'No'), (1, 'Yes')))
+    weight_loss = forms.ChoiceField(label='Weight loss', choices=((0, 'No'), (1, 'Yes')))
     sneezing = forms.ChoiceField(label='Sneezing', choices=((0, 'No'), (1, 'Yes')))
+    fever = forms.ChoiceField(label='Fever', choices=((0, 'No'), (1, 'Yes')))
     lethargy = forms.ChoiceField(label='Lethargy', choices=((0, 'No'), (1, 'Yes')))
+    dehydration = forms.ChoiceField(label='Dehydration', choices=((0, 'No'), (1, 'Yes')))
     w_reduce = forms.ChoiceField(
         label='Wool reduce',
         choices=((0, 'No'), (1, 'Yes')),
         help_text='(Symptom usually appropriate for sheeps, rabbits, etc. If your pet is not one of this just set to "No")'
         )
-    swelling = forms.ChoiceField(label='Swelling', choices=((0, 'No'), (1, 'Yes')))
-    weight_loss = forms.ChoiceField(label='Weight loss', choices=((0, 'No'), (1, 'Yes')))
-    dehydration = forms.ChoiceField(label='Dehydration', choices=((0, 'No'), (1, 'Yes')))
     m_reduce = forms.ChoiceField(
         label='Milk reduce',
         choices=((0, 'No'), (1, 'Yes')),
         help_text='(Symptom usually appropriate for cows, goats, sheeps, etc. If your pet is not one of this just set to "No")',
     )
-    heart = forms.IntegerField(label='Heart rate', min_value=50, max_value=200, required=False)
+    swelling = forms.ChoiceField(label='Swelling', choices=((0, 'No'), (1, 'Yes')))
+    duration = forms.IntegerField(label='Duration', min_value=0, max_value=30)
+    heart = forms.IntegerField(label='Heart rate', min_value=50, max_value=200)
+    temperature = forms.FloatField(label='Body Temperature', min_value=37.5, max_value=42.0, required=False)
 
     def __init__(self, animal_type, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        with open(str(BASE_DIR.parent) + '/Animal_data/breeds.pkl', 'rb') as a:
+        with open(str(BASE_DIR.parent) + '/breeds.pkl', 'rb') as a:
             breeds = pickle.load(a)
 
-        self.fields['breed'].choices = breeds[animal_type]
+        self.fields['breed'].choices = [(b, b) for b in breeds[animal_type]]
