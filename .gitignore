@@ -1,9 +1,4 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
 final/
-ipynb_checkpoints/
+.ipynb_checkpoints/
 DataScience/.ipynb_checkpoints/
-DataScience/animals_proportions.png/
-DataScience/animals_proportions_ver_2.png/
-DataScience/confusions.png/
-DataScience/correlations.png/
-DataScience/correlations_2.png/

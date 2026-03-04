@@ -4,6 +4,7 @@ Application is intended for disease prediction of your pet or farm animals.
 During application development animals data with animal parameters and all possible symptoms for each disease were explore.
 For disease prediction were used ML algorithms with a partial algorithm transformation of own development.
 Using three models for disease prediction:
+
 First model - RandomForest:
     Evaluation:
         Accuracy: 0.9733333333333334
